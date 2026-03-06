@@ -597,3 +597,75 @@ body[data-theme='dark'] .gp-tool-link {
 body[data-theme='dark'] .gp-footer-links {
   border-top-color: rgba(148, 163, 184, 0.35);
 }
+
+
+/* =======================================================================
+   Hotfix: stronger blue branding visibility in Chirpy context
+   ======================================================================= */
+
+:root {
+  --gp-midnight: #0b1220;
+  --gp-blue: #60a5fa;
+  --gp-purple: #a78bfa;
+  --gp-success: #34d399;
+}
+
+/* Ensure homepage blocks always get visible styling */
+.page .content .gp-home .gp-hero,
+.page .gp-home .gp-hero {
+  background: linear-gradient(145deg, rgba(96, 165, 250, 0.2), rgba(167, 139, 250, 0.14)) !important;
+  border: 1px solid rgba(96, 165, 250, 0.5) !important;
+  box-shadow: 0 18px 40px rgba(11, 18, 32, 0.08);
+}
+
+.page .content .gp-home .gp-btn-primary,
+.page .gp-home .gp-btn-primary {
+  background: var(--gp-blue) !important;
+  border-color: var(--gp-blue) !important;
+  color: var(--gp-midnight) !important;
+}
+
+.page .content .gp-home .gp-btn-secondary,
+.page .gp-home .gp-btn-secondary {
+  color: var(--gp-midnight) !important;
+  border-color: var(--gp-purple) !important;
+}
+
+.page .content .gp-home a,
+.page .gp-home a {
+  color: #2563eb;
+}
+
+.page .content .gp-home .gp-tool-link,
+.page .gp-home .gp-tool-link {
+  color: #1d4ed8 !important;
+  border-color: #93c5fd !important;
+  background: rgba(96, 165, 250, 0.08);
+}
+
+.page .content .gp-home .gp-card,
+.page .gp-home .gp-card {
+  border: 1px solid #bfdbfe;
+}
+
+/* Sidebar accent for brand consistency */
+#sidebar .nav-link.active {
+  color: #2563eb !important;
+}
+
+#sidebar .nav-link.active i,
+#sidebar .nav-link:hover i {
+  color: #60a5fa !important;
+}
+
+/* Make avatar logo visible (fallback for transparent background SVG edges) */
+#sidebar .site-avatar {
+  background: #0b1220;
+  border: 1px solid rgba(96, 165, 250, 0.45);
+}
+
+body[data-theme='dark'] .page .content .gp-home .gp-hero,
+body[data-theme='dark'] .page .gp-home .gp-hero {
+  background: linear-gradient(145deg, rgba(96, 165, 250, 0.3), rgba(167, 139, 250, 0.22)) !important;
+  border-color: rgba(96, 165, 250, 0.58) !important;
+}
