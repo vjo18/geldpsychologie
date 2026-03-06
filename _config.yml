@@ -217,6 +217,11 @@ exclude:
   - purgecss.js
   - "*.config.js"
   - "package*.json"
+  - src
+  - public
+  - astro.config.mjs
+  - tsconfig.json
+  - node_modules
 
 jekyll-archives:
   enabled: [categories, tags]
