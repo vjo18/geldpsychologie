@@ -2,6 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
+const withBase = (href: string) => `${base}${href.replace(/^\//, '')}`;
+
 const posts = (await getCollection('blog')).sort((a,b)=> b.data.pubDate.valueOf()-a.data.pubDate.valueOf()).slice(0,4);
 ---
 
@@ -10,8 +13,8 @@ const posts = (await getCollection('blog')).sort((a,b)=> b.data.pubDate.valueOf(
     <h1>Begrijp geld.<br/>Bescherm je tijd, vrijheid en koopkracht.</h1>
     <p>Financiële tools en inzichten die helpen om bewuster om te gaan met geld, beleggen en lange termijn keuzes.</p>
     <div class="actions">
-      <a class="btn btn-primary" href="/tools">Ontdek de tools</a>
-      <a class="btn btn-secondary" href="/kennis">Lees de inzichten</a>
+      <a class="btn btn-primary" href={withBase("/tools")}>Ontdek de tools</a>
+      <a class="btn btn-secondary" href={withBase("/kennis")}>Lees de inzichten</a>
     </div>
   </section>
 
@@ -38,11 +41,11 @@ const posts = (await getCollection('blog')).sort((a,b)=> b.data.pubDate.valueOf(
   <section class="soft">
     <h2>De tools</h2>
     <div class="grid grid-2">
-      <article class="card tool-card"><h3>Wanneer kan ik starten met passief inkomen</h3><p>Tijd</p><a class="tool-link" href="/tools">Start simulatie</a></article>
-      <article class="card tool-card"><h3>Hoeveel moet ik beleggen</h3><p>Inleg</p><a class="tool-link" href="/tools">Start simulatie</a></article>
-      <article class="card tool-card"><h3>Doelvermogen calculator</h3><p>Kapitaal</p><a class="tool-link" href="/tools">Start simulatie</a></article>
-      <article class="card tool-card"><h3>Scenario simulator</h3><p>Risico</p><a class="tool-link" href="/tools">Start simulatie</a></article>
-      <article class="card tool-card"><h3>Uitkeringsfase simulator</h3><p>Duurzaamheid</p><a class="tool-link" href="/tools">Start simulatie</a></article>
+      <article class="card tool-card"><h3>Wanneer kan ik starten met passief inkomen</h3><p>Tijd</p><a class="tool-link" href={withBase("/tools")}>Start simulatie</a></article>
+      <article class="card tool-card"><h3>Hoeveel moet ik beleggen</h3><p>Inleg</p><a class="tool-link" href={withBase("/tools")}>Start simulatie</a></article>
+      <article class="card tool-card"><h3>Doelvermogen calculator</h3><p>Kapitaal</p><a class="tool-link" href={withBase("/tools")}>Start simulatie</a></article>
+      <article class="card tool-card"><h3>Scenario simulator</h3><p>Risico</p><a class="tool-link" href={withBase("/tools")}>Start simulatie</a></article>
+      <article class="card tool-card"><h3>Uitkeringsfase simulator</h3><p>Duurzaamheid</p><a class="tool-link" href={withBase("/tools")}>Start simulatie</a></article>
     </div>
   </section>
 
@@ -54,14 +57,14 @@ const posts = (await getCollection('blog')).sort((a,b)=> b.data.pubDate.valueOf(
   <section class="soft">
     <h2>Coaching</h2>
     <p>Voor mensen die financiële rust willen, een plan willen en emotioneel stabiel willen beleggen.</p>
-    <a class="btn btn-secondary" href="/coaching">Meer over coaching</a>
+    <a class="btn btn-secondary" href={withBase("/coaching")}>Meer over coaching</a>
   </section>
 
   <section>
     <h2>Laatste inzichten</h2>
     <ul class="posts">
       {posts.map((post) => (
-        <li><a href={`/kennis/${post.slug}`}>{post.data.title}</a></li>
+        <li><a href={withBase(`/kennis/${post.slug}`)}>{post.data.title}</a></li>
       ))}
     </ul>
   </section>

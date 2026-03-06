@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://geldpsychologie.be'
+  site: 'https://vjo18.github.io',
+  base: '/geldpsychologie'
 });
