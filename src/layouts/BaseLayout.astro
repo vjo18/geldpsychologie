@@ -16,6 +16,8 @@ const nav = [
   { href: '/coaching', label: 'Coaching' },
   { href: '/over', label: 'Over' }
 ];
+
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
 
 <!doctype html>
@@ -32,6 +34,9 @@ const nav = [
     <link rel="icon" href="/assets/img/geldpsychologie-logo.svg" />
   </head>
   <body>
+    <div class="bg-orb bg-orb-one"></div>
+    <div class="bg-orb bg-orb-two"></div>
+
     <header class="site-header">
       <div class="container nav-wrap">
         <a class="brand" href="/">
@@ -40,7 +45,7 @@ const nav = [
         </a>
         <nav>
           {nav.map((item) => (
-            <a class={path === item.href ? 'active' : ''} href={item.href}>{item.label}</a>
+            <a class={isActive(item.href) ? 'active' : ''} href={item.href}>{item.label}</a>
           ))}
         </nav>
       </div>

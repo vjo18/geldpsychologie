@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { categoryMap } from '../../lib/blog';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -9,11 +10,33 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+const recent = (await getCollection('blog'))
+  .filter((p) => p.slug !== post.slug)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
 ---
+
 <BaseLayout title={`${post.data.title} | Kennis | GeldPsychologie`} description={post.data.description}>
-  <article>
-    <h1>{post.data.title}</h1>
-    <p><small>{post.data.pubDate.toLocaleDateString('nl-BE')} · <span class="mono">{post.data.category}</span></small></p>
-    <Content />
-  </article>
+  <section class="blog-layout">
+    <article class="post-card">
+      <p class="post-meta">
+        {post.data.pubDate.toLocaleDateString('nl-BE')} · {categoryMap[post.data.category]}
+      </p>
+      <h1>{post.data.title}</h1>
+      <p>{post.data.description}</p>
+      <p>
+        <a class="tag" href={`/kennis/categorie/${post.data.category}`}>Meer in {categoryMap[post.data.category]}</a>
+      </p>
+      <Content />
+    </article>
+
+    <aside class="blog-sidebar">
+      <h3 class="side-title">Meest recent</h3>
+      <ul class="side-list">
+        {recent.map((item) => (
+          <li><a href={`/kennis/${item.slug}`}>{item.data.title}</a></li>
+        ))}
+      </ul>
+    </aside>
+  </section>
 </BaseLayout>

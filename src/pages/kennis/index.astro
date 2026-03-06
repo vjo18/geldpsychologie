@@ -1,33 +1,49 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { categoryList, categoryMap } from '../../lib/blog';
 
-const posts = (await getCollection('blog')).sort((a,b)=> b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
-const categories = [
-  { key: 'geldpsychologie', label: '🧠 Geldpsychologie' },
-  { key: 'beleggen-begrijpen', label: '📈 Beleggen begrijpen' },
-  { key: 'financiele-keuzes', label: '🧭 Financiële keuzes' },
-  { key: 'mentale-modellen', label: '🧩 Mentale modellen' }
-] as const;
+const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const recent = posts.slice(0, 5);
+const categoryCount = Object.fromEntries(categoryList.map((c) => [c.key, posts.filter((p) => p.data.category === c.key).length]));
 ---
-<BaseLayout title="Kennis | GeldPsychologie" description="Artikels over geldpsychologie, beleggen begrijpen, financiële keuzes en mentale modellen.">
+
+<BaseLayout title="Kennis | GeldPsychologie" description="Echte blog-ervaring: recente artikels, categorieën en inzichten over geldpsychologie.">
   <section class="hero">
     <h1>Kennis</h1>
-    <p>Heldere artikels zonder hype. Focus op gedrag, begrip en betere keuzes.</p>
+    <p>Een echte blog rond geldgedrag, beleggen begrijpen, financiële keuzes en mentale modellen.</p>
   </section>
 
-  {categories.map((category) => {
-    const filtered = posts.filter((p) => p.data.category === category.key);
-    if (filtered.length === 0) return null;
-    return (
-      <section>
-        <h2>{category.label}</h2>
-        <ul class="posts">
-          {filtered.map((post) => (
-            <li><a href={`/kennis/${post.slug}`}>{post.data.title}</a> — {post.data.description}</li>
-          ))}
-        </ul>
-      </section>
-    );
-  })}
+  <section class="blog-layout">
+    <div class="blog-main">
+      {posts.map((post) => (
+        <article class="post-card">
+          <div class="post-meta">
+            {post.data.pubDate.toLocaleDateString('nl-BE')} · {categoryMap[post.data.category]}
+          </div>
+          <h3><a href={`/kennis/${post.slug}`}>{post.data.title}</a></h3>
+          <p>{post.data.description}</p>
+          <a class="tag" href={`/kennis/categorie/${post.data.category}`}>Bekijk categorie</a>
+        </article>
+      ))}
+    </div>
+
+    <aside class="blog-sidebar">
+      <h3 class="side-title">Categorieën</h3>
+      <div class="tag-list">
+        {categoryList.map((category) => (
+          <a class="tag" href={`/kennis/categorie/${category.key}`}>
+            {category.label} ({categoryCount[category.key]})
+          </a>
+        ))}
+      </div>
+
+      <h3 class="side-title">Meest recent</h3>
+      <ul class="side-list">
+        {recent.map((post) => (
+          <li><a href={`/kennis/${post.slug}`}>{post.data.title}</a></li>
+        ))}
+      </ul>
+    </aside>
+  </section>
 </BaseLayout>
