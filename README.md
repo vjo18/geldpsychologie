@@ -1,11 +1,13 @@
 # GeldPsychologie.be — Astro + Markdown
 
-Deze repo is gemigreerd naar **Astro** als basis voor een snelle, SEO-vriendelijke website die makkelijk uitbreidbaar blijft met Codex.
+Deze repo gebruikt nu **Astro** als website-engine (niet meer Chirpy als render-engine).
 
-## Stack
-- Astro
-- Markdown content collections (`src/content/blog`)
-- Statische pages voor Home, Tools, Kennis, Methodiek, Coaching en Over
+## Waarom je nog de oude Chirpy-look kan zien
+Als GitHub Pages nog via Jekyll workflow publiceert, zie je de oude sidebar-layout.
+Daarom staat er nu een aparte Astro deploy workflow in:
+- `.github/workflows/deploy-astro.yml`
+
+Vanaf de volgende deploy op `main` wordt de site uit `dist/` gepubliceerd.
 
 ## Development
 ```bash
@@ -19,15 +21,15 @@ npm run build
 ```
 
 ## Structuur
-- `src/pages/index.astro` → homepage
-- `src/pages/tools.astro` → tools overzicht
-- `src/pages/kennis/index.astro` + `[slug].astro` → blog listing + detail
-- `src/pages/methodiek.astro` → visie en 5 principes
-- `src/pages/coaching.astro` → coaching aanbod
-- `src/pages/over.astro` → positionering en achtergrond
-- `src/content/blog/*.md` → artikels in Markdown
+- `src/pages/index.astro` → Home
+- `src/pages/tools.astro` → Tools
+- `src/pages/kennis/index.astro` + `[slug].astro` → Kennis (blog)
+- `src/pages/methodiek.astro` → Methodiek
+- `src/pages/coaching.astro` → Coaching
+- `src/pages/over.astro` → Over
+- `src/content/blog/*.md` → artikels
 
 ## SEO-focus
-- Handmatige title/description/OG tags in `BaseLayout.astro`
+- Handmatige `title`, `description`, `og:*` in `BaseLayout.astro`
 - Schone URLs per pagina
-- Content workflow: publiceer 1 artikel per week in `src/content/blog`
+- Wekelijkse contentflow via Markdown in `src/content/blog`
