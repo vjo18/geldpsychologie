@@ -1,9 +1,9 @@
 ---
-# the default layout is 'page'
+layout: page
 title: Contact
 icon: fas fa-paper-plane
-order: 4
+order: 6
+permalink: /contact/
 ---
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
+Neem contact op via e-mail voor vragen over coaching of samenwerkingen.
