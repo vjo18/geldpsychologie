@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort((a,b)=> b.data.pubDate.valueOf()-a.data.pubDate.valueOf()).slice(0,4);
+---
+
+<BaseLayout title="GeldPsychologie.be | Begrijp geld" description="Financiële tools en inzichten voor bewuster omgaan met geld, beleggen en lange termijn keuzes.">
+  <section class="hero">
+    <h1>Begrijp geld.<br/>Bescherm je tijd, vrijheid en koopkracht.</h1>
+    <p>Financiële tools en inzichten die helpen om bewuster om te gaan met geld, beleggen en lange termijn keuzes.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="/tools">Ontdek de tools</a>
+      <a class="btn btn-secondary" href="/kennis">Lees de inzichten</a>
+    </div>
+  </section>
+
+  <section class="soft">
+    <h2>Het probleem</h2>
+    <p>Veel mensen hebben financiële stress door:</p>
+    <ul>
+      <li>gebrek aan richting</li>
+      <li>verwarring over beleggen</li>
+      <li>tegenstrijdige informatie</li>
+      <li>emotionele beslissingen</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Wat je hier vindt</h2>
+    <div class="grid grid-3">
+      <article class="card"><h3>🧠 Psychologie van geld</h3><p>gedrag, emoties en mentale modellen.</p></article>
+      <article class="card"><h3>📊 Praktische simulaties</h3><p>tools om financiële keuzes te begrijpen.</p></article>
+      <article class="card"><h3>📚 Financiële educatie</h3><p>heldere artikels zonder hype.</p></article>
+    </div>
+  </section>
+
+  <section class="soft">
+    <h2>De tools</h2>
+    <div class="grid grid-2">
+      <article class="card tool-card"><h3>Wanneer kan ik starten met passief inkomen</h3><p>Tijd</p><a class="tool-link" href="/tools">Start simulatie</a></article>
+      <article class="card tool-card"><h3>Hoeveel moet ik beleggen</h3><p>Inleg</p><a class="tool-link" href="/tools">Start simulatie</a></article>
+      <article class="card tool-card"><h3>Doelvermogen calculator</h3><p>Kapitaal</p><a class="tool-link" href="/tools">Start simulatie</a></article>
+      <article class="card tool-card"><h3>Scenario simulator</h3><p>Risico</p><a class="tool-link" href="/tools">Start simulatie</a></article>
+      <article class="card tool-card"><h3>Uitkeringsfase simulator</h3><p>Duurzaamheid</p><a class="tool-link" href="/tools">Start simulatie</a></article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Filosofie</h2>
+    <p><strong>Geld gaat niet alleen over rendement. Het gaat over keuzes.</strong></p>
+  </section>
+
+  <section class="soft">
+    <h2>Coaching</h2>
+    <p>Voor mensen die financiële rust willen, een plan willen en emotioneel stabiel willen beleggen.</p>
+    <a class="btn btn-secondary" href="/coaching">Meer over coaching</a>
+  </section>
+
+  <section>
+    <h2>Laatste inzichten</h2>
+    <ul class="posts">
+      {posts.map((post) => (
+        <li><a href={`/kennis/${post.slug}`}>{post.data.title}</a></li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

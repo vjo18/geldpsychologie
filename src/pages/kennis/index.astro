@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort((a,b)=> b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
+const categories = [
+  { key: 'geldpsychologie', label: '🧠 Geldpsychologie' },
+  { key: 'beleggen-begrijpen', label: '📈 Beleggen begrijpen' },
+  { key: 'financiele-keuzes', label: '🧭 Financiële keuzes' },
+  { key: 'mentale-modellen', label: '🧩 Mentale modellen' }
+] as const;
+---
+<BaseLayout title="Kennis | GeldPsychologie" description="Artikels over geldpsychologie, beleggen begrijpen, financiële keuzes en mentale modellen.">
+  <section class="hero">
+    <h1>Kennis</h1>
+    <p>Heldere artikels zonder hype. Focus op gedrag, begrip en betere keuzes.</p>
+  </section>
+
+  {categories.map((category) => {
+    const filtered = posts.filter((p) => p.data.category === category.key);
+    if (filtered.length === 0) return null;
+    return (
+      <section>
+        <h2>{category.label}</h2>
+        <ul class="posts">
+          {filtered.map((post) => (
+            <li><a href={`/kennis/${post.slug}`}>{post.data.title}</a> — {post.data.description}</li>
+          ))}
+        </ul>
+      </section>
+    );
+  })}
+</BaseLayout>

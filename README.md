@@ -1,28 +1,33 @@
-# GeldPsychologie.be
+# GeldPsychologie.be — Astro + Markdown
 
-Startversie van de website op basis van **Jekyll + Chirpy theme**.
+Deze repo is gemigreerd naar **Astro** als basis voor een snelle, SEO-vriendelijke website die makkelijk uitbreidbaar blijft met Codex.
 
-## Lokale development
+## Stack
+- Astro
+- Markdown content collections (`src/content/blog`)
+- Statische pages voor Home, Tools, Kennis, Methodiek, Coaching en Over
 
+## Development
 ```bash
-bundle install
-bundle exec jekyll s
+npm install
+npm run dev
 ```
 
-Daarna is de site bereikbaar op `http://127.0.0.1:4000`.
+## Build
+```bash
+npm run build
+```
 
 ## Structuur
+- `src/pages/index.astro` → homepage
+- `src/pages/tools.astro` → tools overzicht
+- `src/pages/kennis/index.astro` + `[slug].astro` → blog listing + detail
+- `src/pages/methodiek.astro` → visie en 5 principes
+- `src/pages/coaching.astro` → coaching aanbod
+- `src/pages/over.astro` → positionering en achtergrond
+- `src/content/blog/*.md` → artikels in Markdown
 
-- `index.md` → homepage met hero, pijlers, tools, coaching en laatste inzichten.
-- `_tabs/` → hoofdnavigatie (Tools, Kennis, Methodiek, Coaching, Over, Contact).
-- `_posts/` → kennisartikels.
-- `assets/css/override.css` → custom styling voor GeldPsychologie.
-
-## Deployment
-
-Pas in `_config.yml` minimaal deze velden aan voor productie:
-
-- `url`
-- `baseurl`
-- `social`
-- analytics/webmaster verificatie (optioneel)
+## SEO-focus
+- Handmatige title/description/OG tags in `BaseLayout.astro`
+- Schone URLs per pagina
+- Content workflow: publiceer 1 artikel per week in `src/content/blog`

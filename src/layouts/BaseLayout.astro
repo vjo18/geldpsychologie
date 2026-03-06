@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'GeldPsychologie: beter gedrag, betere keuzes, meer rust.' } = Astro.props;
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/tools', label: 'Tools' },
+  { href: '/kennis', label: 'Kennis' },
+  { href: '/methodiek', label: 'Methodiek' },
+  { href: '/coaching', label: 'Coaching' },
+  { href: '/over', label: 'Over' }
+];
+---
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/assets/img/geldpsychologie-logo.svg" />
+    <link rel="icon" href="/assets/img/geldpsychologie-logo.svg" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="/">
+          <img src="/assets/img/geldpsychologie-logo.svg" alt="GeldPsychologie logo" />
+          <span>GeldPsychologie</span>
+        </a>
+        <nav>
+          {nav.map((item) => (
+            <a class={path === item.href ? 'active' : ''} href={item.href}>{item.label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a href="/tools">Tools</a>
+          <a href="/kennis">Kennis</a>
+          <a href="/methodiek">Methodiek</a>
+          <a href="/coaching">Coaching</a>
+          <a href="/over">Over</a>
+        </div>
+        <div>
+          <a href="/disclaimer">Disclaimer</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
