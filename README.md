@@ -1,13 +1,6 @@
-# GeldPsychologie.be — Astro + Markdown
+# GeldPsychologie.be — Astro
 
-Deze repo gebruikt nu **Astro** als website-engine (niet meer Chirpy als render-engine).
-
-## Waarom je nog de oude Chirpy-look kan zien
-Als GitHub Pages nog via Jekyll workflow publiceert, zie je de oude sidebar-layout.
-Daarom staat er nu een aparte Astro deploy workflow in:
-- `.github/workflows/deploy-astro.yml`
-
-Vanaf de volgende deploy op `main` wordt de site uit `dist/` gepubliceerd.
+Deze repository draait volledig op **Astro** en bevat geen Jekyll/Chirpy-structuur meer.
 
 ## Development
 ```bash
@@ -29,7 +22,7 @@ npm run build
 - `src/pages/over.astro` → Over
 - `src/content/blog/*.md` → artikels
 
-## SEO-focus
-- Handmatige `title`, `description`, `og:*` in `BaseLayout.astro`
-- Schone URLs per pagina
-- Wekelijkse contentflow via Markdown in `src/content/blog`
+## GitHub Pages
+- Site URL: `https://vjo18.github.io`
+- Base path: `/geldpsychologie/`
+- Deploy workflow: `.github/workflows/deploy-astro.yml`
